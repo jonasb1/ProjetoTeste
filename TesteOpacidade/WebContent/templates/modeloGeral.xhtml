@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:insert name="metadata" />
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Teste Opacidade</title>
+	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+	<p:growl id="msgGlobal" sticky="true" />
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit header="Teste Opacidade" position="north"
+			style="font-size:20px" resizable="false" closable="false"
+			collapsed="false">
+
+		</p:layoutUnit>
+
+		<p:layoutUnit
+			header="Endereço: Rua do Expedicionário - Ourinhos - SP  "
+			position="south" resizable="false" collapsible="false">
+		</p:layoutUnit>
+
+		<p:layoutUnit size="190" header="Menu Principal" position="west"
+			resizable="false" collapsible="false">
+
+			<ui:insert name="menu"></ui:insert>
+
+			<h:form id="frmMnPrincipal">
+
+				<p:panelMenu id="pnlMnPrincipal">
+
+
+					<p:submenu label="Arquivos">
+						<p:menuitem value="Autenticação"
+							outcome="/pages/autenticacao2.xhtml" icon="ui-icon-lightbulb"
+							rendered="#{autenticacaoBean.usuarioLogado.funcao == null}" />
+
+						<p:menuitem value="Principal" outcome="/pages/principal.xhtml"
+							icon="ui-icon-home"
+							rendered="#{autenticacaoBean.usuarioLogado.funcao != null}" />
+						<p:menuitem value="Sair"
+							rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"
+							action="#{autenticacaoBean.sair()}" icon="ui-icon-power" />
+					</p:submenu>
+
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Funcionário" icon="ui-icon-tag"
+							outcome="/pages/usuario/usuarioPesquisa.xhtml"
+							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
+					</p:submenu>
+
+
+				</p:panelMenu>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center" resizable="false" collapsible="false">
+
+			<ui:insert name="conteudo"></ui:insert>
+
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="east" resizable="false" collapsible="false">
+
+			<ui:insert name="conteudo2"></ui:insert>
+		</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+</html>
