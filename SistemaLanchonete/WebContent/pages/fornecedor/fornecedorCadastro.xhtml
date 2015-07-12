@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="foracao" value="#{fornecedorBean.acao}"></f:viewParam>
+			<f:viewParam name="forId" value="#{fornecedorBean.id}"></f:viewParam>
+			<f:event listener="#{fornecedorBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmFornecedor">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Fornecedor" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid id="pnFornecedorDados" columns="2">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					disabled="true" value="#{fornecedorBean.fornecedorCadastro.id}" />
+
+				<h:outputText value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{fornecedorBean.fornecedorCadastro.nome}"
+					readonly="#{fornecedorBean.acao == 'Excluir'}">
+					<f:validateBean></f:validateBean>
+
+				</p:inputText>
+
+				<h:outputText value="Endereço:" />
+				<p:inputText size="30"
+					value="#{fornecedorBean.fornecedorCadastro.endereco}"
+					readonly="#{fornecedorBean.acao == 'Excluir'}">
+					<f:validateBean></f:validateBean>
+
+				</p:inputText>
+
+				<h:outputText value="Número:" />
+				<p:inputText size="30"
+					value="#{fornecedorBean.fornecedorCadastro.numero}"
+					readonly="#{fornecedorBean.acao == 'Excluir'}">
+					<f:validateBean></f:validateBean>
+
+				</p:inputText>
+
+
+
+				<h:outputText value="Estado" />
+				<p:selectOneMenu  value="#{fornecedorBean.fornecedorCadastro.estado}" 
+					converter="estadoConverter" disabled="#{fornecedorBean.acao == 'Excluir'}">
+					<f:selectItem itemValue="" itemLabel="Selecione um estado:" />
+					<f:selectItem itemValue="" itemLabel="" />
+
+					<f:selectItems value="#{fornecedorBean.listaEstados}" var="estado"
+						itemValue="#{estado}" itemLabel="#{estado.nome}" />
+					<f:validateBean />
+				</p:selectOneMenu>
+
+				<h:outputText value="Telefone:" />
+				<p:inputMask mask="(99) 9999-9999" size="12"
+					value="#{fornecedorBean.fornecedorCadastro.telefone}"
+					readonly="#{fornecedorBean.acao == 'Excluir'}"></p:inputMask>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo"
+					update=":frmFornecedor:pnFornecedorDados"
+					actionListener="#{fornecedorBean.novo()}"
+					rendered="#{fornecedorBean.acao == 'Novo'}" />
+ 
+				<p:commandButton value="Salvar" icon="ui-icon-check"
+					update=":msgGlobal :frmFornecedor:pnFornecedorDados"
+					actionListener="#{fornecedorBean.salvar()}"
+					rendered="#{fornecedorBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{fornecedorBean.excluir()}" update=":msgGlobal"
+					rendered="#{fornecedorBean.acao == 'Excluir'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{fornecedorBean.editar()}" update=":msgGlobal"
+					rendered="#{fornecedorBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/fornecedor/fornecedorPesquisa.xhtml?faces-redirect=true" />
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

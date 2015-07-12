@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="proacao" value="#{produtoBean.acao}"></f:viewParam>
+			<f:viewParam name="proId" value="#{produtoBean.id}"></f:viewParam>
+			<f:event listener="#{produtoBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmProduto">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Produto" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid id="pnProdutoDados" columns="2">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					disabled="true" value="#{produtoBean.produtoCadastro.id}" />
+
+				<h:outputText value="Descrição:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{produtoBean.produtoCadastro.descricao}"
+					readonly="#{produtoBean.acao == 'Excluir'}">
+					<f:validateBean></f:validateBean>
+
+				</p:inputText>
+
+				<h:outputText value="Preço:" />
+				<p:inputText size="30" value="#{produtoBean.produtoCadastro.preco}"
+					readonly="#{produtoBean.acao == 'Excluir'}" converterMessage="Informe um valor válido para o campo preço">
+					<f:convertNumber/>
+					<f:validateBean/>
+					
+				</p:inputText>
+
+				<h:outputText value="Quantidade" />
+				<p:inputText size="30" converterMessage="Informe um valor válido para o campo quantidade"
+					value="#{produtoBean.produtoCadastro.quantidade}"
+					readonly="#{produtoBean.acao == 'Excluir'}">
+					<f:convertNumber/>
+					<f:validateBean />
+
+				</p:inputText>
+
+				<h:outputText value="Fornecedor" />
+				<p:selectOneMenu value="#{produtoBean.produtoCadastro.fornecedor}"
+					converter="fornecedorConverter">
+					<f:selectItem itemValue="" itemLabel="Selecione um fornecedor:" />
+					<f:selectItems value="#{produtoBean.listaFornecedores}"
+						var="fornecedor" itemValue="#{fornecedor}"
+						itemLabel="#{fornecedor.nome}" />
+					<f:validateBean />
+				</p:selectOneMenu>
+
+				<h:outputText value="Unidade" />
+				<p:selectOneMenu value="#{produtoBean.produtoCadastro.unidade}"
+					converter="unidadeConverter">
+					<f:selectItem itemValue="" itemLabel="Selecione uma unidade:" />
+					<f:selectItems value="#{produtoBean.listaUnidades}"
+						var="unidade" itemValue="#{unidade}"
+						itemLabel="#{unidade.descricao}" />
+					<f:validateBean />
+				</p:selectOneMenu>
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmProduto:pnProdutoDados"
+					actionListener="#{produtoBean.novo()}"
+					rendered="#{produtoBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Salvar" icon="ui-icon-check"
+					update=":msgGlobal :frmProduto:pnProdutoDados"
+					actionListener="#{produtoBean.salvar()}"
+					rendered="#{produtoBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{produtoBean.excluir()}" update=":msgGlobal"
+					rendered="#{produtoBean.acao == 'Excluir'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{produtoBean.editar()}" update=":msgGlobal"
+					rendered="#{produtoBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/produto/produtoPesquisa.xhtml?faces-redirect=true" />
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="funacao" value="#{funcionarioBean.acao}"></f:viewParam>
+			<f:viewParam name="funId" value="#{funcionarioBean.id}"></f:viewParam>
+			<f:event listener="#{funcionarioBean.carregarCadastro()}" type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmFuncionario">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Funcionario" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnFuncionarioDados">
+
+				<h:outputText value="Código"  />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					value="#{funcionarioBean.funcionarioCadastro.id}" disabled="true" />
+
+				<h:outputText value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{funcionarioBean.funcionarioCadastro.nome}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}" >
+					
+					<f:validateBean></f:validateBean>
+					</p:inputText>
+
+				<p:outputLabel value="CPF:" />
+				<p:inputMask mask="999.999.999-99" size="20"
+					value="#{funcionarioBean.funcionarioCadastro.cpf}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}">
+					<f:validateBean></f:validateBean>
+				</p:inputMask>
+				
+				<p:outputLabel value="Função:" />
+				<p:selectOneMenu
+					value="#{funcionarioBean.funcionarioCadastro.funcao}"
+					disabled="#{funcionarioBean.acao == 'Excluir'}" >
+					<f:selectItem itemLabel="Selecione uma função:" />
+					<f:selectItem itemLabel="Administrador" itemValue="Adminstrador" />
+					<f:selectItem itemLabel="Balconista" itemValue="Balconista" />
+					<f:selectItem itemLabel="Gerente" itemValue="Gerente" />
+					
+				
+				<f:validateBean></f:validateBean>
+				</p:selectOneMenu>
+
+
+				<h:outputText value="Telefone:" />
+				<p:inputMask mask="(99) 9999-9999" size="12"
+					value="#{funcionarioBean.funcionarioCadastro.telefone}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}"></p:inputMask>
+			
+	
+				<h:outputText value="Senha: " />
+				<p:password maxlength="8" size="10" promptLabel="Entre com a senha"
+					goodLabel="Boa" weakLabel="Fraca" strongLabel="Forte"
+					feedback="true" 
+					value="#{funcionarioBean.funcionarioCadastro.senha}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}"
+					 >
+					
+					<f:validateBean></f:validateBean>
+					</p:password>
+					
+	
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo"
+					update=":frmFuncionario:pnFuncionarioDados"
+					rendered="#{funcionarioBean.acao == 'Novo'}"
+					actionListener="#{funcionarioBean.novo()}" />
+				<p:commandButton value="Salvar"
+					actionListener="#{funcionarioBean.salvar()}" icon="ui-icon-check"
+					update=":msgGlobal :frmFuncionario:pnFuncionarioDados"
+					rendered="#{funcionarioBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{funcionarioBean.excluir()}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao == 'Excluir'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{funcionarioBean.editar()}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/funcionario/funcionarioPesquisa.xhtml?faces-redirect=true"
+					></p:button>
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

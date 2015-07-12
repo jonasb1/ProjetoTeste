@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="estacao" value="#{estadoBean.acao}"></f:viewParam>
+			<f:viewParam name="estId" value="#{estadoBean.id}"></f:viewParam>
+			<f:event listener="#{estadoBean.carregarCadastro()}" type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmEstado">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Estado" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid id="pnEstadoDados" columns="2">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					disabled="true" value="#{estadoBean.estadoCadastro.id}" />
+
+				<h:outputText value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{estadoBean.estadoCadastro.nome}"
+					readonly="#{estadoBean.acao == 'Excluir'}" >
+					<f:validateBean></f:validateBean>
+					
+				</p:inputText>
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmEstado:pnEstadoDados"
+					actionListener="#{estadoBean.novo()}"
+					rendered="#{estadoBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Salvar" update=":msgGlobal :frmEstado:pnEstadoDados"
+					actionListener="#{estadoBean.salvar()}" icon="ui-icon-check"
+					rendered="#{estadoBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir" actionListener="#{estadoBean.excluir()}"
+					 update=":msgGlobal"
+					rendered="#{estadoBean.acao == 'Excluir'}"  />
+
+				<p:commandButton value="Editar" actionListener="#{estadoBean.editar()}"
+					update=":msgGlobal"
+					rendered="#{estadoBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/estado/estadoPesquisa.xhtml?faces-redirect=true"
+					 />
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

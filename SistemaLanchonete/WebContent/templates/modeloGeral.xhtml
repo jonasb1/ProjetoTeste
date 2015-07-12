@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:insert name="metadata" />
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Lanchonete</title>
+	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+	<p:growl id="msgGlobal" sticky="true" />
+
+	<p:layout fullPage="true">
+		
+		<p:layoutUnit header="Pastelândia" position="north"
+			style="font-size:20px" resizable="false" closable="false"
+			collapsed="false">
+
+		</p:layoutUnit>
+
+		<p:layoutUnit header="Endereço: Rua do Expedicionário - Ourinhos - SP  " position="south"
+			resizable="false" collapsible="false">
+		</p:layoutUnit>
+
+		<p:layoutUnit size="190" header="Menu Principal" position="west"
+			resizable="false" collapsible="false">
+
+			<ui:insert name="menu"></ui:insert>
+
+			<h:form id="frmMnPrincipal">
+
+				<p:panelMenu id="pnlMnPrincipal">
+
+
+					<p:submenu label="Arquivos">
+						<p:menuitem value="Autenticação"
+							outcome="/pages/autenticacao.xhtml" icon="ui-icon-lightbulb"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao == null}" />
+
+						<p:menuitem value="Principal" outcome="/pages/principal.xhtml"
+							icon="ui-icon-home"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}" />
+						<p:menuitem value="Sair"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}"
+							action="#{autenticacaoBean.sair()}" icon="ui-icon-power" />
+
+
+					</p:submenu>
+
+					<p:submenu label="Cadastros"
+						rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}">
+						<p:menuitem value="Estado" icon="ui-icon-tag"
+							outcome="/pages/estado/estadoPesquisa.xhtml"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+
+						<p:menuitem value="Fornecedor" icon="ui-icon-tag"
+							outcome="/pages/fornecedor/fornecedorPesquisa.xhtml"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+
+						<p:menuitem value="Funcionário" icon="ui-icon-tag"
+							outcome="/pages/funcionario/funcionarioPesquisa.xhtml"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+						<p:menuitem value="Produto" icon="ui-icon-tag"
+							outcome="/pages/produto/produtoPesquisa.xhtml" />
+						<p:menuitem value="Unidade" icon="ui-icon-tag"
+							outcome="/pages/unidade/unidadePesquisa.xhtml"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+
+
+					</p:submenu>
+
+					<p:submenu label="Vendas"
+						rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}">
+						<p:menuitem value="Novo" icon="ui-icon-star"
+							outcome="/pages/venda/vendaCadastro.xhtml" />
+
+						<p:menuitem value="Pesquisa"
+							outcome="/pages/venda/vendaPesquisa.xhtml" icon="ui-icon-search"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+							
+						
+							
+					</p:submenu>
+
+					<p:submenu label="Compras"
+						rendered="#{autenticacaoBean.funcionarioLogado.funcao != null }">
+						<p:menuitem value="Novo" icon="ui-icon-star"
+							outcome="/pages/compra/compraCadastro.xhtml" />
+
+						<p:menuitem value="Pesquisa"
+							outcome="/pages/compra/compraPesquisa.xhtml"
+							icon="ui-icon-search"
+							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+					</p:submenu>
+
+					<p:submenu label="Usuário"
+						rendered="#{autenticacaoBean.funcionarioLogado.funcao != null }">
+						<p:menuitem
+							value="#{autenticacaoBean.funcionarioLogado.nome} on-line"
+							disabled="false"></p:menuitem>
+
+					</p:submenu>
+
+				</p:panelMenu>
+
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center" resizable="false" collapsible="false">
+
+			<ui:insert name="conteudo"></ui:insert>
+
+		</p:layoutUnit>
+
+			
+		<p:layoutUnit position="east" resizable="false" collapsible="false">
+	
+					<ui:insert name="conteudo2"></ui:insert>	
+		</p:layoutUnit>	
+	</p:layout>
+
+</h:body>
+</html>

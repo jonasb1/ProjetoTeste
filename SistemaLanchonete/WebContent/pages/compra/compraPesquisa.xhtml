@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+
+
+
+	<ui:define name="conteudo">
+		<h:form id="formPesquisa">
+			<center>
+				<p:toolbar>
+					<f:facet name="left">
+						<h:outputText value="Compras" />
+					</f:facet>
+				</p:toolbar>
+
+				<h:outputScript name="calendario_pt_BR.js" library="js" />
+				<p:panelGrid columns="6">
+					<p:outputLabel value="Data Inicial"
+						title="Escolha a data inicial para a pesquisa" />
+					<p:calendar value="#{compraBean.filtro.dataInicial}" locale="pt_BR" />
+
+					<p:outputLabel value="Data Final"
+						title="Escolha a data final para a pesquisa" />
+					<p:calendar value="#{compraBean.filtro.dataFinal}" />
+
+					<p:commandButton value="Buscar"
+						actionListener="#{compraBean.buscar()}"
+						update=":msgGlobal :formPesquisa:tblCompras" icon="ui-icon-search" />
+
+				</p:panelGrid>
+
+			</center>
+			<p:separator />
+
+			<p:dataTable id="tblCompras"
+				emptyMessage="Nenhum registro encontrado"
+				value="#{compraBean.listaComprasFiltradas}" var="compra" rows="20"
+				paginator="true">
+
+				<f:facet name="header">
+					<h:commandLink>
+						<p:graphicImage library="image" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="tblCompras" fileName="compras" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage name="/image/pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="tblCompras"
+							encoding="ISO-8859-1" fileName="compras" />
+					</h:commandLink>
+				</f:facet>
+
+				<p:column headerText="Código">
+					<h:outputText value="#{compra.id}" />
+				</p:column>
+
+
+				<p:column headerText="Horário">
+					<h:outputText value="#{compra.horario_compra}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+
+				</p:column>
+
+				<p:column headerText="Valor Total">
+					<h:outputText value="#{compra.valor_total_compra}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+
+
+				</p:column>
+
+				<p:column headerText="Funcionário">
+					<h:outputText value="#{compra.funcionario.nome}" />
+				</p:column>
+
+
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

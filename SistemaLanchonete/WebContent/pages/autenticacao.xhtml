@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="growl"  />
+			
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Autenticação" />
+				</f:facet>
+					
+			</p:toolbar>
+
+
+			<p:panel header="Login"
+				style="font-size:15px; position: absolute; 
+				width: 215px;height: 150px;
+				left:50%;top:50%
+				;margin-left:-130px;margin-top:-120px;">
+
+				<p:panelGrid columns="2">
+					<p:outputLabel value="CPF:" />
+					<p:inputMask mask="999.999.999-99" size="13"
+						value="#{autenticacaoBean.funcionarioLogado.cpf}">
+						<f:validateBean />
+					</p:inputMask>
+
+					<h:outputText value="Senha: " />
+					<p:password maxlength="8" size="13"
+						value="#{autenticacaoBean.funcionarioLogado.senha}">
+						<f:validateBean />
+					</p:password>
+
+				</p:panelGrid>
+				<center>
+					<!-- 				Para mudar de pagina Action -->
+					<p:commandButton value="Entrar" update="growl" icon="ui-icon-key"
+						action="#{autenticacaoBean.autenticar()}" />
+				</center>
+
+			</p:panel>
+
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>

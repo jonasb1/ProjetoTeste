@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+
+
+
+	<ui:define name="conteudo">
+		<h:form id="formPesquisa">
+			<center>
+				<p:toolbar>
+					<f:facet name="left">
+						<h:outputText value="Vendas" />
+					</f:facet>
+				</p:toolbar>
+
+				<h:outputScript name="calendario_pt_BR.js" library="js" />
+				<p:panelGrid columns="6">
+					<p:outputLabel value="Data Inicial"
+						title="Escolha a data inicial para a pesquisa" />
+
+					<p:calendar value="#{vendaBean.filtro.dataInicial}" locale="pt_BR" />
+
+					<p:outputLabel value="Data Final"
+						title="Escolha a data final para a pesquisa" />
+					<p:calendar value="#{vendaBean.filtro.dataFinal}" />
+
+					<p:commandButton value="Buscar"
+						actionListener="#{vendaBean.buscar()}"
+						update=":msgGlobal :formPesquisa:tblVendas" icon="ui-icon-search" />
+
+				</p:panelGrid>
+
+			</center>
+			<p:separator />
+
+			<p:dataTable id="tblVendas" emptyMessage="Nenhum registro encontrado"
+				value="#{vendaBean.listaVendasFiltradas}" var="venda" rows="20"
+				paginator="true">
+
+				<f:facet name="header">
+					<h:commandLink>
+						<p:graphicImage library="image" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="tblVendas" fileName="vendas" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage name="/image/pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="tblVendas"
+							encoding="ISO-8859-1" fileName="vendas" />
+					</h:commandLink>
+				</f:facet>
+
+				<p:column headerText="Código">
+					<h:outputText value="#{venda.id}" />
+				</p:column>
+
+
+				<p:column headerText="Horário">
+					<h:outputText value="#{venda.horario_venda}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+
+
+				</p:column>
+
+				<p:column headerText="Valor Total">
+					<h:outputText value="#{venda.valor_total_venda}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Funcionário">
+					<h:outputText value="#{venda.funcionario.nome}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

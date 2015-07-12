@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="uniacao" value="#{unidadeBean.acao}"/>
+			<f:viewParam name="uniId" value="#{unidadeBean.id}"/>
+			<f:event listener="#{unidadeBean.carregarCadastro()}" 	type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+		
+	<ui:define name="conteudo">
+		<h:form id="frmUnidade">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Unidade" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnUnidadeDados">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					disabled="true" value="#{unidadeBean.unidadeCadastro.id}" />
+
+				<h:outputText value="Descrição:" />
+				<p:inputText maxlength="50" size="30"
+				readonly="#{unidadeBean.acao == 'Excluir'}"
+					value="#{unidadeBean.unidadeCadastro.descricao}">
+					<f:validateBean></f:validateBean>
+					
+					</p:inputText> 
+					
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmUnidade:pnUnidadeDados"
+					actionListener="#{unidadeBean.novo()}"
+					rendered="#{unidadeBean.acao == 'Novo'}" />
+					
+				<p:commandButton value="Salvar" update=":msgGlobal :frmUnidade:pnUnidadeDados" icon="ui-icon-check"
+					actionListener="#{unidadeBean.salvar()}"
+					rendered="#{unidadeBean.acao == 'Novo' and autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
+
+				<p:commandButton value="Excluir" update=":msgGlobal"	 
+					actionListener="#{unidadeBean.excluir()}"
+					rendered="#{unidadeBean.acao == 'Excluir'}"/>
+
+				<p:commandButton value="Editar" update=":msgGlobal"	 
+					actionListener="#{unidadeBean.editar()}"
+					rendered="#{unidadeBean.acao == 'Editar'}"/>
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/unidade/unidadePesquisa.xhtml?faces-redirect=true"
+					/>
+			</h:panelGrid>
+
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

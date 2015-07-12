@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{vendaBean.carregarProdutos()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmVendaCad">
+<!-- 			<p:toolbar> -->
+<!-- 				<f:facet name="left"> -->
+<!-- 					<h:outputText value="Vendas" /> -->
+<!-- 				</f:facet> -->
+
+<!-- 			</p:toolbar> -->
+
+<!-- 			<p:separator /> -->
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Listagem dos Produtos" />
+				</f:facet>
+			</p:toolbar>
+
+			<!-- Lista dos Produtos em estoque -->
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				value="#{vendaBean.listaProdutos}" id="dtProduto" paginatorPosition="bottom"
+				filteredValue="#{vendaBean.listaProdutosFiltrados}" var="produto"
+				rows="4" paginator="true">
+
+
+				<p:column headerText="Código" style="width: 8%">
+					<center>
+						<h:outputText value="#{produto.id}" />
+					</center>
+
+				</p:column>
+
+				<p:column headerText="Descrição" filterBy="#{produto.descricao}"
+					sortBy="#{produto.descricao}">
+					<center>
+						<h:outputText value="#{produto.descricao}" />
+					</center>
+				</p:column>
+
+				<p:column headerText="Preço" filterBy="#{produto.preco}"
+					style="width: 12%" sortBy="#{produto.preco}">
+					<center>
+						<h:outputText value="R$ #{produto.preco}" />
+					</center>
+				</p:column>
+
+				<p:column headerText="Quantidade" sortBy="#{produto.quantidade}"
+					style="width: 9%">
+					<center>
+						<h:outputText value="#{produto.quantidade}" />
+					</center>
+				</p:column>
+
+				<p:column headerText="Fornecedor">
+					<center>
+						<h:outputText value="#{produto.fornecedor.nome}" />
+					</center>
+				</p:column>
+
+
+				<p:column headerText="Opções:" style="width: 12%">
+					<center>
+						<p:commandButton value="Adicionar" icon="ui-icon-cart"
+							actionListener="#{vendaBean.adicionar(produto)}"
+							update=":msgGlobal :frmVendaCad:tblItens " />
+					</center>
+				</p:column>
+
+
+			</p:dataTable>
+
+			<p:separator />
+			<!-- 			Carrinho de compra  -->
+
+			<p:dataTable emptyMessage="Lista de Itens Vazia" id="tblItens"
+				value="#{vendaBean.listaItensVenda}" var="item" rows="5"
+				paginator="true" paginatorPosition="bottom">
+
+				<p:column headerText="Produto">
+					<h:outputText value="#{item.produto.descricao}"
+						style="font-weight:bold" />
+				</p:column>
+
+				<p:column headerText="Fornecedor">
+					<h:outputText value="#{item.produto.fornecedor.nome}"
+						style="font-weight:bold" />
+				</p:column>
+
+
+				<p:column headerText="Quantidade"
+					footerText="Total Itens: #{vendaBean.vendaCadastro.quantidade}">
+					<center>
+						<h:outputText value="#{item.quantidade}" style="font-weight:bold" />
+					</center>
+				</p:column>
+
+				<!-- 				<p:column headerText="Quantidade"> -->
+				<!-- 									<p:spinner value="#{item.quantidade}" min="0" -->
+				<!-- 										max="#{item.produto.quantidade}" size="6"> -->
+
+				<!-- 										<p:ajax update=":frmVendaCad:tblItens " />  -->
+
+				<!-- 									</p:spinner> -->
+
+				<!-- 				</p:column> -->
+				<!-- 		footerText Atributo do p:colum para adicionar rodape-->
+
+				<p:column headerText="Valor Parcial">
+					<f:facet name="footer">
+						<h:outputText value="Valor Total:" style="font-weight:bold;font-size:18px" />
+
+						<h:outputText
+							value="R$  #{vendaBean.vendaCadastro.valor_total_venda}"
+							style="font-weight:bold;font-size:18px">
+							<f:convertNumber pattern="0.00" />
+						</h:outputText>
+
+					</f:facet>
+					<center>
+						<h:outputText value="R$ #{item.valor_parcial_venda}"
+							id="valorParcial" style="font-weight:bold">
+							<f:convertNumber pattern="0.00" />
+						</h:outputText>
+					</center>
+				</p:column>
+
+				<p:column headerText="Opções:">
+					<center>
+						<p:commandButton value="Remover" style="font-size:14px"
+							actionListener="#{vendaBean.remover(item)}" icon="ui-icon-trash"
+							update=":frmVendaCad:tblItens " />
+					</center>
+				</p:column>
+			</p:dataTable>
+
+			<p:separator />
+
+			<p:separator />
+
+			<h:panelGrid columns="1">
+
+				<!-- Pf-Comando para executar comandos do prime oncomplete primeiro ele faz o comando antes -->
+				<p:commandButton value="Finalizar Venda" style="font-size:17px"
+					actionListener="#{vendaBean.carregarDadosVenda}"
+					update=":msgGlobal :painel:pnlDadosTroco"
+					oncomplete="PF('wvDlgTroco').show();" icon="ui-icon-check" />
+				<!-- 					update=":frFinVenda:pnlDadosFinVenda" /> -->
+
+
+			</h:panelGrid>
+
+		</h:form>
+
+		<!-- 	Quem vai aparecer em cima de quem, body ele vai ficar em cima -->
+		<p:dialog closable="true" draggable="true" modal="true"
+			resizable="false" header="Dados da Venda" widgetVar="wvDlgFinVenda"
+			appendTo="@(body)" style="font-size:26px">
+
+			<h:form id="frFinVenda">
+				<p:panelGrid columns="2" id="pnlDadosFinVenda">
+					<h:outputText value="Horário:" />
+					<h:outputText value="#{vendaBean.vendaCadastro.horario_venda}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+
+					<h:outputText value="Funcionário:" />
+					<h:outputText value="#{vendaBean.vendaCadastro.funcionario.nome}" />
+
+					<h:outputText value="Valor Total:" />
+					<h:outputText
+						value="R$ #{vendaBean.vendaCadastro.valor_total_venda}" />
+
+
+					<p:commandButton value="Salvar"
+						actionListener="#{vendaBean.salvar()}" icon="ui-icon-check"
+						update=":msgGlobal :frmVendaCad:tblItens :frmVendaCad:dtProduto"
+						oncomplete="PF('wvDlgFinVenda').hide();"
+						onclick="PF('wvDlgTroco').hide();" />
+
+					<p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+						onclick="PF('wvDlgFinVenda').hide(); " />
+
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<!-- Caixa de Dialago do Troco -->
+		<p:dialog closable="true" draggable="true" modal="true"
+			resizable="false" header="Troco" widgetVar="wvDlgTroco"
+			appendTo="@(body)" style="font-size:26px">
+
+			<h:form id="painel">
+				<p:panelGrid columns="2" id="pnlDadosTroco">
+
+					<h:outputText value="Valor Total:" />
+					<h:outputText
+						value="R$ #{vendaBean.vendaCadastro.valor_total_venda}" />
+
+
+					<h:outputText value="Quantidade Recebida:" />
+					<p:inputText value="#{vendaBean.vendaCadastro.valorRecebido}">
+						<f:convertNumber pattern="0.00" />
+					</p:inputText>
+
+					<h:outputText value="Troco:" />
+					<h:outputText value="R$#{vendaBean.vendaCadastro.valorTroco}" />
+
+
+					<p:commandButton value="Finalizar"
+						actionListener="#{vendaBean.carregarDadosVenda}"
+						oncomplete="PF('wvDlgFinVenda').show();" icon="ui-icon-check"
+						update=":frFinVenda:pnlDadosFinVenda" />
+
+
+					<p:commandButton value="Calcular" icon="ui-icon-calculator"
+						actionListener="#{vendaBean.calcularTroco()}"
+						update=":msgGlobal :painel:pnlDadosTroco" />
+
+				</p:panelGrid>
+
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
+</html>
