@@ -30,7 +30,7 @@
 
 				<f:facet name="footer">
 					<p:button value="Novo" icon="ui-icon-document"
-						outcome="/pages/usuario/usuarioNovo.xhtml?faces-redirect=true">
+						outcome="/pages/usuario/usuarioCadastro.xhtml?faces-redirect=true">
 
 						<f:param name="funacao" value="Novo" />
 					</p:button>
@@ -61,8 +61,20 @@
 					<h:outputText value="#{usuario.funcao}" />
 				</p:column>
 
-				<p:column headerText="Opções:">
-					
+					<p:column headerText="Opções:">
+					<p:button value="Editar"
+						outcome="/pages/usuario/usuarioCadastro.xhtml?faces-redirect=true">
+						<f:param name="usacao" value="Editar" />
+						<f:param name="usId" value="#{usuario.id}" />
+
+					</p:button>
+					<p:button value="Excluir"
+						outcome="/pages/usuario/usuarioCadastro.xhtml?faces-redirect=true">
+						<f:param name="usacao" value="Excluir" />
+						<f:param name="usId" value="#{usuario.id}" />
+
+					</p:button>
+
 				</p:column>
 
 			</p:dataTable>
