@@ -14,7 +14,6 @@
 		</f:metadata>
 	</ui:define>
 
-
 	<ui:define name="conteudo">
 		<h:form>
 			<p:toolbar>
@@ -41,7 +40,7 @@
 
 				<p:column headerText="Código" style="width: 5%">
 					<center>
-						<h:outputText value="#{usario.id}" />
+						<h:outputText value="#{usuario.id}" />
 					</center>
 
 				</p:column>
@@ -49,17 +48,17 @@
 
 				<p:column headerText="Nome" filterBy="#{usuario.nome}"
 					sortBy="#{usuario.nome}">
-					<h:outputText value="#{usario.nome}" />
+					<h:outputText value="#{usuario.nome}" />
 				</p:column>
 
 
 				<p:column headerText="Id do Funcionário" filterBy="#{usario.codigoFuncionario}"
 					sortBy="#{usario.codigoFuncionario}">
-					<h:outputText value="#{usario.codigoFuncionario}" />
+					<h:outputText value="#{usuario.codigoFuncionario}" />
 				</p:column>
 
 				<p:column headerText="Função">
-					<h:outputText value="#{usario.funcao}" />
+					<h:outputText value="#{usuario.funcao}" />
 				</p:column>
 
 				<p:column headerText="Opções:">
