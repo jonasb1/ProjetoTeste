@@ -11,31 +11,30 @@
 		<f:metadata>
 			<f:viewParam name="usacao" value="#{usuarioBean.acao}"></f:viewParam>
 			<f:viewParam name="usId" value="#{usuarioBean.id}"></f:viewParam>
-			<f:event listener="#{usuarioBean.carregarCadastro()}" type="preRenderView"></f:event>
+			<f:event listener="#{usuarioBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
 		</f:metadata>
 
 	</ui:define>
 
 	<ui:define name="conteudo">
 		<h:form id="frmUsuario">
-			
+
 			<p:toolbar>
 				<f:facet name="left">
 					<h:outputText value="Usuário" />
 				</f:facet>
 
 			</p:toolbar>
-			
+
 			<h:panelGrid columns="2" id="pnUsuarioDados">
 
-				<h:outputText value="Código"  />
-									
-	
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					value="#{usuarioBean.usuarioCadastro.id}" disabled="true" />
+
+				
 			</h:panelGrid>
-			
-			
-			
-			
 
 		</h:form>
 	</ui:define>
