@@ -1,10 +1,13 @@
 package br.com.testeOpacidade.bean;
 
+
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import org.apache.commons.codec.digest.DigestUtils;
+
 import br.com.testeOpacidade.dao.UsuarioDAO;
 import br.com.testeOpacidade.model.Usuario;
 import br.com.testeOpacidade.util.FacesUtil;
@@ -55,7 +58,7 @@ public class UsuarioBean {
 
 		try {
 			UsuarioDAO dao = new UsuarioDAO();
-			usuarioCadastro.setSenha(DigestUtils.md5Hex(usuarioCadastro.getSenha()));
+			usuarioCadastro.setSenha(usuarioCadastro.getSenha());
 			dao.salvar(usuarioCadastro);
 
 			usuarioCadastro = new Usuario();

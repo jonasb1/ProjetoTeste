@@ -33,8 +33,67 @@
 				<p:inputText maxlength="20" size="15" readonly="true"
 					value="#{usuarioBean.usuarioCadastro.id}" disabled="true" />
 
+				<h:outputText value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{usuarioBean.usuarioCadastro.nome}"
+					readonly="#{usuarioBean.acao == 'Excluir'}">
+					
+				
+				</p:inputText>
+
+				<p:outputLabel value="Id do Funcionário:" />
+				<p:inputMask mask="99-999999" size="20"
+					value="#{usuarioBean.usuarioCadastro.codigoFuncionario}"
+					readonly="#{usuarioBean.acao == 'Excluir'}">
+
+				</p:inputMask>
+
+				<p:outputLabel value="Função:" />
+				<p:selectOneMenu value="#{usuarioBean.usuarioCadastro.funcao}"
+					disabled="#{usuarioBean.acao == 'Excluir'}">
+					<f:selectItem itemLabel="Selecione uma função:" />
+					<f:selectItem itemLabel="Administrador" itemValue="Adminstrador" />
+					<f:selectItem itemLabel="Usuário" itemValue="Usuário" />
+			
+				
+				</p:selectOneMenu>
+				
+				<h:outputText value="Senha: " />
+				<p:password maxlength="8" size="10" promptLabel="Entre com a senha"
+					goodLabel="Boa" weakLabel="Fraca" strongLabel="Forte"
+					feedback="true" 
+					value="#{usuarioBean.usuarioCadastro.senha}"
+					readonly="#{usuarioBean.acao == 'Excluir'}"
+					 >
+					
+					</p:password>
+				
 				
 			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmUsuario:pnUsuarioDados"
+					rendered="#{usuarioBean.acao == 'Novo'}"
+					actionListener="#{usuarioBean.novo()}" />
+				<p:commandButton value="Salvar"
+					actionListener="#{usuarioBean.salvar()}" icon="ui-icon-check"
+					update=":msgGlobal :frmUsuario:pnUsuarioDados"
+					rendered="#{usuarioBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{usuarioBean.excluir()}" update=":msgGlobal"
+					rendered="#{usuarioBean.acao == 'Excluir'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{usuarioBean.editar()}" update=":msgGlobal"
+					rendered="#{usuarioBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/usuario/usuarioPesquisa.xhtml?faces-redirect=true"></p:button>
+			</h:panelGrid>
+
+
+
 
 		</h:form>
 	</ui:define>

@@ -7,15 +7,19 @@
 		<property name="hibernate.connection.password">jonas</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/opacidade</property>
 		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.show_sql">true</property>
+		<property name="connection.pool_size">1</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 		<mapping class="br.com.testeOpacidade.model.Marca" />
 		<mapping class="br.com.testeOpacidade.model.Setor" />
 		<mapping class="br.com.testeOpacidade.model.Modelo" />
-		<mapping class="br.com.testeOpacidade.model.Veiculo"/>
-		<mapping class="br.com.testeOpacidade.model.Usuario"/>
+		<mapping class="br.com.testeOpacidade.model.Veiculo" />
+		<mapping class="br.com.testeOpacidade.model.Usuario" />
 
 	</session-factory>
 </hibernate-configuration>

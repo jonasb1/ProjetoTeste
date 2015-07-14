@@ -3,11 +3,13 @@ package br.com.testeOpacidade.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -19,12 +21,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 	@NamedQuery (name="Usuario.autenticar", query="SELECT usuario FROM Usuario usuario WHERE usuario.codigoFuncionario = :codigoFuncionario AND usuario.senha = :senha")
 })
 public class Usuario {
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	@Column(name="USU_ID")
 	private Long id;
 	
 	@NotEmpty(message="O campo nome é obrigatório")
+	@Size(min=5 , max=50 , message="Informe um nome de 5 a 50 carácteres")
 	@Column(name="USU_NOME")
 	private String nome;
 	
