@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="marcao" value="#{marcaBean.acao}"></f:viewParam>
+			<f:viewParam name="marId" value="#{marcaBean.id}"></f:viewParam>
+			<f:event listener="#{marcaBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmMarca">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Marca" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="pnMarcaDados">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					value="#{marcaBean.marcaCadastro.id}" disabled="true" />
+
+				<h:outputText value="Descrição:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{marcaBean.marcaCadastro.descricao}"
+					readonly="#{marcaBean.acao == 'Excluir'}">
+					
+				</p:inputText>
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmMarca:pnMarcaDados"
+					actionListener="#{marcaBean.novo()}"
+					rendered="#{marcaBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Salvar" update=":msgGlobal :frmMarca:pnMarcaDados"
+					actionListener="#{marcaBean.salvar()}" icon="ui-icon-check"
+					rendered="#{marcaBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir" actionListener="#{marcaBean.excluir()}"
+					 update=":msgGlobal"
+					rendered="#{marcaBean.acao == 'Excluir'}"  />
+
+				<p:commandButton value="Editar" actionListener="#{marcaBean.editar()}"
+					update=":msgGlobal"
+					rendered="#{marcaBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/marca/marcaPesquisa.xhtml?faces-redirect=true"
+					 />
+			</h:panelGrid>
+
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

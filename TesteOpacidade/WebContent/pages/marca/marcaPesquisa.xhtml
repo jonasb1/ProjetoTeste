@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{marcaBean.carregar()}" type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+
+
+	<ui:define name="conteudo">
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Marca" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				value="#{marcaBean.listaMarcas}" paginatorPosition="bottom"
+				var="marca" rows="10">
+
+				<f:facet name="footer">
+					<p:button value="Novo" icon="ui-icon-document"
+						outcome="/pages/marca/marcaCadastro.xhtml?faces-redirect=true">
+
+						<f:param name="marcao" value="Novo" />
+					</p:button>
+
+
+				</f:facet>
+
+				<p:column headerText="Código" style="width: 5%">
+					<center>
+						<h:outputText value="#{marca.id}" />
+					</center>
+
+				</p:column>
+
+
+				<p:column headerText="Nome" sortBy="#{marca.descricao}">
+					<h:outputText value="#{marca.descricao}" />
+				</p:column>
+
+
+				<p:column headerText="Opções:">
+					<p:button value="Editar"
+						outcome="/pages/marca/marcaCadastro.xhtml?faces-redirect=true">
+						<f:param name="marcao" value="Editar" />
+						<f:param name="marId" value="#{marca.id}" />
+
+					</p:button>
+					<p:button value="Excluir"
+						outcome="/pages/marca/marcaCadastro.xhtml?faces-redirect=true">
+						<f:param name="marcao" value="Excluir" />
+						<f:param name="marId" value="#{marca.id}" />
+
+					</p:button>
+
+				</p:column>
+
+			</p:dataTable>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

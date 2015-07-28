@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+
+			<f:event listener="#{modeloBean.carregar()}" type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Modelo" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				value="#{modeloBean.listaModelos}" paginatorPosition="bottom"
+				filteredValue="#{modeloBean.listaModelosFiltrados}" var="modelo"
+				rows="10" paginator="true">
+
+				<f:facet name="footer">
+					<p:button value="Novo" icon="ui-icon-document"
+						outcome="/pages/modelo/modeloCadastro.xhtml?faces-redirect=true">
+						<f:param name="modacao" value="Novo" />
+
+					</p:button>
+				</f:facet>
+				<p:column headerText="Código" style="width: 5%">
+					<center>
+						<h:outputText value="#{modelo.id}" />
+					</center>
+					
+				</p:column>
+
+				<p:column headerText="Descrição" filterBy="#{modelo.desrcicao}"
+					sortBy="#{modelo.desrcicao}">
+					<h:outputText value="#{modelo.desrcicao}" />
+				</p:column>
+
+				<p:column headerText="Ano" filterBy="#{modelo.ano}">
+					<h:outputText value="#{modelo.ano}" />
+				</p:column>
+
+				<p:column headerText="Marca" filterBy="#{modelo.marca.descricao}">
+					<h:outputText value="#{modelo.marca.descricao}" />
+				</p:column>
+	
+				<p:column headerText="Opções:" >
+					<p:button value="Editar"
+						outcome="/pages/modelo/modeloCadastro.xhtml?faces-redirect=true">
+						<f:param name="modacao" value="Editar" />
+						<f:param name="modId" value="#{modelo.id}" />
+
+					</p:button>
+					<p:button value="Excluir"
+						outcome="/pages/modelo/modeloCadastro.xhtml?faces-redirect=true">
+						<f:param name="modacao" value="Excluir" />
+						<f:param name="modId" value="#{modelo.id}" />
+
+					</p:button>
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

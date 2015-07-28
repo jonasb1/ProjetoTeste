@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="modacao" value="#{modeloBean.acao}"></f:viewParam>
+			<f:viewParam name="modId" value="#{modeloBean.id}"></f:viewParam>
+			<f:event listener="#{modeloBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmModelo">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Modelo" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid id="pnModeloDados" columns="2">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					disabled="true" value="#{modeloBean.modeloCadastro.id}" />
+
+				<h:outputText value="Descrição:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{modeloBean.modeloCadastro.desrcicao}"
+					readonly="#{modeloBean.acao == 'Excluir'}">
+				
+					<f:validateBean/>
+				</p:inputText>
+
+				<h:outputText value="Ano:" />
+				<p:inputText size="30"
+					value="#{modeloBean.modeloCadastro.ano}"
+					readonly="#{modeloBean.acao == 'Excluir'}">
+
+				</p:inputText>
+
+				<h:outputText value="Modelo:" />
+				<p:selectOneMenu  value="#{modeloBean.modeloCadastro.marca}" 
+					converter="marcaConverter" disabled="#{modeloBean.acao == 'Excluir'}">
+					<f:selectItem itemValue="" itemLabel="Selecione uma marca:" />
+					<f:selectItem itemValue="" itemLabel="" />
+
+					<f:selectItems value="#{modeloBean.listaMarcas}" var="marca"
+						itemValue="#{marca}" itemLabel="#{marca.descricao}" />
+					
+				</p:selectOneMenu>
+
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo"
+					update=":frmModelo:pnModeloDados"
+					actionListener="#{modeloBean.novo()}"
+					rendered="#{modeloBean.acao == 'Novo'}" />
+ 
+				<p:commandButton value="Salvar" icon="ui-icon-check"
+					update=":msgGlobal :frmModelo:pnModeloDados"
+					actionListener="#{modeloBean.salvar()}"
+					rendered="#{modeloBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{modeloBean.excluir()}" update=":msgGlobal"
+					rendered="#{modeloBean.acao == 'Excluir'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{modeloBean.editar()}" update=":msgGlobal"
+					rendered="#{modeloBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/modelo/modeloPesquisa.xhtml?faces-redirect=true" />
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

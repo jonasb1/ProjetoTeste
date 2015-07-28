@@ -57,6 +57,16 @@
 						<p:menuitem value="Funcionário" icon="ui-icon-tag"
 							outcome="/pages/usuario/usuarioPesquisa.xhtml"
 							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
+
+						<p:menuitem value="Marca" icon="ui-icon-tag"
+							outcome="/pages/marca/marcaPesquisa.xhtml"
+							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
+
+							<p:menuitem value="Modelo" icon="ui-icon-tag"
+							outcome="/pages/modelo/modeloPesquisa.xhtml"
+							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
+	
+
 					</p:submenu>
 
 

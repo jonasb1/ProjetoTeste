@@ -7,33 +7,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="modelo")
+@Table(name = "modelo")
+@NamedQueries({
+		@NamedQuery(name = "Modelo.listar", query = "SELECT modelo FROM Modelo modelo"),
+		@NamedQuery(name = "Modelo.buscarPorCodigo", query = "SELECT modelo FROM Modelo modelo WHERE id = :id") })
 public class Modelo {
 	@GeneratedValue
 	@Id
-	@Column(name="MOD_ID")
+	@Column(name = "MOD_ID")
 	private Long id;
-	
-	@NotEmpty(message="Campo descrição obrigatório")
-	@Size(min=3 , max=50 , message="Informe uma descrição de 3 a 50 carácteres")
-	@Column(name="MOD_DESCRICAO", nullable=false)
+
+	@NotEmpty(message = "Campo descrição obrigatório")
+	@Size(min = 3, max = 50, message = "Informe uma descrição de 3 a 50 carácteres")
+	@Column(name = "MOD_DESCRICAO", nullable = false)
 	private String desrcicao;
-	
-	@NotNull(message="O campo ano é obrigatório")
-	@Column(name="MOD_ANO", nullable=false)
-	@Size(min=4 , max=5 , message="Informe um ano com 4 algarismos")	
-	private int ano;
-	
-	@NotNull(message="O campo marca é obrigatório")
+
+	@NotNull(message = "O campo ano é obrigatório")
+	@Column(name = "MOD_ANO", nullable = false)
+	@Min(value=1900 , message="Informe uma número maior ou igual a 1980")
+	private Integer ano;
+
+	@NotNull(message="Campo marca é obrigatório")
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="MOD_MAR_ID",nullable=false,referencedColumnName="MAR_ID")
+	@JoinColumn(name="MOD_MAR_ID",nullable=false, referencedColumnName="MAR_ID")
 	private Marca marca;
 
 	public Long getId() {
@@ -52,11 +58,11 @@ public class Modelo {
 		this.desrcicao = desrcicao;
 	}
 
-	public int getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 
@@ -66,12 +72,6 @@ public class Modelo {
 
 	public void setMarca(Marca marca) {
 		this.marca = marca;
-	}
-
-	@Override
-	public String toString() {
-		return "Modelo [id=" + id + ", desrcicao=" + desrcicao + ", ano=" + ano
-				+ ", marca=" + marca + "]";
 	}
 
 	@Override
@@ -99,7 +99,10 @@ public class Modelo {
 		return true;
 	}
 
-	
-		
-	
+	@Override
+	public String toString() {
+		return "Modelo [id=" + id + ", desrcicao=" + desrcicao + ", ano=" + ano
+				+ ", marca=" + marca + "]";
+	}
+
 }
