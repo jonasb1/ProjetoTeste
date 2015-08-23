@@ -34,7 +34,7 @@
 					value="#{marcaBean.marcaCadastro.id}" disabled="true" />
 
 				<h:outputText value="Descrição:" />
-				<p:inputText maxlength="50" size="30"
+				<p:inputText maxlength="50" size="30" onblur="this.value = this.value.toUpperCase();"
 					value="#{marcaBean.marcaCadastro.descricao}"
 					readonly="#{marcaBean.acao == 'Excluir'}">
 					

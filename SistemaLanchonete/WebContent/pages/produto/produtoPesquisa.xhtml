@@ -26,7 +26,7 @@
 				emptyMessage="Nenhum registro encontrado"
 				value="#{produtoBean.listaProdutos}" paginatorPosition="bottom"
 				filteredValue="#{produtoBean.listaProdutosFiltrados}" var="produto"
-				rows="9" paginator="true">
+				rows="15" paginator="true">
 
 				<f:facet name="header">
 					<h:commandLink>
@@ -52,7 +52,7 @@
 
 
 				</f:facet>
-				<p:column headerText="Código" style="width: 5%">
+				<p:column headerText="Código" style="width: 10%" filterBy="#{produto.id}">
 
 					<h:outputText value="#{produto.id}" />
 

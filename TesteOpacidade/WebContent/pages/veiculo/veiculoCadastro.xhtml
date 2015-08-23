@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="veiacao" value="#{veiculoBean.acao}"></f:viewParam>
+			<f:viewParam name="veiId" value="#{veiculoBean.id}"></f:viewParam>
+			<f:event listener="#{veiculoBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmVeiculo">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Veiculo" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid id="pnVeiculoDados" columns="2">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					disabled="true" value="#{veiculoBean.veiculoCadastro.id}" />
+
+				<h:outputText value="Modelo:" />
+				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.modelo}" 
+					converter="modeloConverter" 
+					disabled="#{veiculoBean.acao == 'Excluir'}">
+					<f:selectItem itemValue="" itemLabel="Selecione um modelo:"  />
+
+
+					<f:selectItems value="#{veiculoBean.listaModelos}" var="modelo"
+						itemValue="#{modelo}" itemLabel="#{modelo.desrcicao}" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Setor:" />
+				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.setor}"
+					converter="setorConverter"
+					disabled="#{veiculoBean.acao == 'Excluir'}">
+					<f:selectItem itemValue="" itemLabel="Selecione um setor:" />
+					<f:selectItem itemValue="" itemLabel="" />
+
+					<f:selectItems value="#{veiculoBean.listaSetores}" var="setor"
+						itemValue="#{setor}" itemLabel="#{setor.descricao}" />
+					<f:validateBean />
+				</p:selectOneMenu>
+				
+				
+				<h:outputText value="Nº Frota" />
+				<p:inputMask mask="9999" size="8" maxlength="5"
+					value="#{veiculoBean.veiculoCadastro.numero_frota}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}">
+
+				</p:inputMask>
+
+	
+				<h:outputText value="Placa:" />
+				<p:inputMask mask="aa*-9999" size="8" maxlength="8" onblur="this.value = this.value.toUpperCase();"
+					value="#{veiculoBean.veiculoCadastro.placa}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}">
+
+				</p:inputMask>
+
+
+				<h:outputText value="Opacidade:" />
+				<p:spinner size="6" value="#{veiculoBean.veiculoCadastro.opacidade}" maxlength="5" min="0"
+					readonly="#{veiculoBean.acao == 'Excluir'}" stepFactor="0.01" >
+					<f:validateBean />
+				</p:spinner>
+
+				<p:outputLabel value="Turbinado:" />
+				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.turbinado}"
+					disabled="#{veiculoBean.acao == 'Excluir'}">
+					<f:selectItem itemLabel="Selecione:" />
+					<f:selectItem itemValue="" itemLabel="" />
+					<f:selectItem itemLabel="Sim" itemValue="Sim" />
+					<f:selectItem itemLabel="Não" itemValue="Não" />
+
+					<f:validateBean></f:validateBean>
+				</p:selectOneMenu>
+
+				<p:outputLabel value="LDA:" />
+				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.lda}"
+					disabled="#{veiculoBean.acao == 'Excluir'}">
+					<f:selectItem itemLabel="Selecione:" />
+					<f:selectItem itemValue="" itemLabel="" />
+					<f:selectItem itemLabel="Sim" itemValue="Sim" />
+					<f:selectItem itemLabel="Não" itemValue="Não" />
+
+					<f:validateBean></f:validateBean>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Ultimo Teste:" />
+				<p:calendar size="8" id="mask" value="#{veiculoBean.veiculoCadastro.ultimo_teste}" pattern="dd-MM-yyyy" mask="true" />
+				
+
+	
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmVeiculo:pnVeiculoDados"
+					actionListener="#{veiculoBean.novo()}"
+					rendered="#{veiculoBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Salvar" icon="ui-icon-check"
+					update=":msgGlobal :frmVeiculo:pnVeiculoDados"
+					actionListener="#{veiculoBean.salvar()}"
+					rendered="#{veiculoBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{veiculoBean.excluir()}" update=":msgGlobal"
+					rendered="#{veiculoBean.acao == 'Excluir'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{veiculoBean.editar()}" update=":msgGlobal"
+					rendered="#{veiculoBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/veiculo/veiculoPesquisa.xhtml?faces-redirect=true" />
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

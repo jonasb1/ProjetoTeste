@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="todosVeiculos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cf3b419-c5e3-458e-aea6-3106226fc767">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     veiculo.`VEI_FROTA` AS veiculo_VEI_FROTA,
+     veiculo.`VEI_OPACIDADE` AS veiculo_VEI_OPACIDADE,
+     veiculo.`VEI_SET_ID` AS veiculo_VEI_SET_ID,
+     modelo.`MOD_DESCRICAO` AS modelo_MOD_DESCRICAO,
+     marca.`MAR_DESCRICAO` AS marca_MAR_DESCRICAO,
+     setor.`SET_DESCRICAO` AS setor_SET_DESCRICAO,
+     veiculo.`VEI_ULTIMO_TESTE` AS veiculo_VEI_ULTIMO_TESTE
+FROM
+     `modelo` modelo INNER JOIN `veiculo` veiculo ON modelo.`MOD_ID` = veiculo.`VEI_MOD_ID`
+     INNER JOIN `marca` marca ON modelo.`MOD_MAR_ID` = marca.`MAR_ID`
+     INNER JOIN `setor` setor ON veiculo.`VEI_SET_ID` = setor.`SET_ID`]]>
+	</queryString>
+	<field name="veiculo_VEI_FROTA" class="java.lang.Integer"/>
+	<field name="veiculo_VEI_OPACIDADE" class="java.lang.Double"/>
+	<field name="veiculo_VEI_SET_ID" class="java.lang.Long"/>
+	<field name="modelo_MOD_DESCRICAO" class="java.lang.String"/>
+	<field name="marca_MAR_DESCRICAO" class="java.lang.String"/>
+	<field name="setor_SET_DESCRICAO" class="java.lang.String"/>
+	<field name="veiculo_VEI_ULTIMO_TESTE" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement x="117" y="0" width="318" height="47" uuid="a14448d4-9317-49cb-82d8-12693320edb5"/>
+				<textElement textAlignment="Center">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teste Opacidade]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="156" y="0" width="241" height="38" uuid="4fefedc4-1dae-46e4-8ee2-c19d826d13d5"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Relatório de Veículos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="67" height="24" uuid="31840696-db1e-48e3-9f3c-2be1c82eb99c"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Footlight MT Light" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Frota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="0" width="99" height="24" uuid="bb5c0712-6779-4a97-9080-960945296d5c"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Footlight MT Light" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="0" width="150" height="24" uuid="26d83e36-501c-476a-8688-a97f80790333"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Footlight MT Light" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="144" height="24" uuid="8fb7f9fc-2474-4ba7-b17a-0423de7cfbce"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Footlight MT Light" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="95" height="24" uuid="11b6db39-b3f7-4a72-9cd3-9474330b5539"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Footlight MT Light" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opacidade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="67" height="22" uuid="9fec63be-6b12-47e8-9f5b-f509f42a47cc"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{veiculo_VEI_FROTA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="67" y="0" width="99" height="22" uuid="0e4fab02-b6df-49e3-9a7f-9b5dbb0823af"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modelo_MOD_DESCRICAO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="166" y="0" width="150" height="22" uuid="0adf9943-81f5-459c-a11d-640b65fdd509"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{marca_MAR_DESCRICAO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="316" y="0" width="144" height="22" uuid="d1292d5c-0086-4fe7-9a08-7724941dabe9"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{setor_SET_DESCRICAO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="460" y="0" width="95" height="22" uuid="6e14abc4-83ca-484b-addb-a53abc35964e"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{veiculo_VEI_OPACIDADE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="22" width="80" height="20" uuid="649d1c58-cf87-4e8e-af4d-3fe9f6a9ccdc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="22" width="40" height="20" uuid="654021ef-5bd7-41d0-b536-db8f0f8be7c3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="0" y="22" width="97" height="20" uuid="c675c589-401f-4910-a044-cdc8f04ac2e6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

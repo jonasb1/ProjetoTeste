@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="setAcao" value="#{setorBean.acao}"></f:viewParam>
+			<f:viewParam name="setId" value="#{setorBean.id}"></f:viewParam>
+			<f:event listener="#{setorBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmSetor">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Setor" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="pnSetorDados">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					value="#{setorBean.setorCadastro.id}" disabled="true" />
+
+				<h:outputText value="Descrição:" /> 
+				<p:inputText maxlength="50" size="30" onblur="this.value = this.value.toUpperCase();"
+					value="#{setorBean.setorCadastro.descricao}"
+					readonly="#{setorBean.acao == 'Excluir'}">
+					
+				</p:inputText>
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" update=":frmSetor:pnSetorDados"
+					actionListener="#{setorBean.novo()}"
+					rendered="#{setorBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Salvar" update=":msgGlobal :frmSetor:pnSetorDados"
+					actionListener="#{setorBean.salvar()}" icon="ui-icon-check"
+					rendered="#{setorBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Excluir" actionListener="#{setorBean.excluir()}"
+					 update=":msgGlobal"
+					rendered="#{setorBean.acao == 'Excluir'}"  />
+
+				<p:commandButton value="Editar" actionListener="#{setorBean.editar()}"
+					update=":msgGlobal"
+					rendered="#{setorBean.acao == 'Editar'}" />
+
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+					outcome="/pages/setor/setorPesquisa.xhtml?faces-redirect=true"
+					 />
+			</h:panelGrid>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

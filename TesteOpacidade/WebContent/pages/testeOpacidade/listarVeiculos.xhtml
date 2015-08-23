@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+
+			<f:event listener="#{veiculoBean.carregarPesquisaVeiculos()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Dados dos Veículos" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				value="#{veiculoBean.listaVeiculos}" paginatorPosition="bottom"
+				filteredValue="#{veiculoBean.listaVeiculosFiltrados}" var="veiculo"
+				rows="10" paginator="true">
+
+				<f:facet name="footer">
+				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+						outcome="/templates/modeloGeral.xhtml?faces-redirect=true" />
+				
+					<p:button value="Realizar Teste" icon="ui-icon-document"
+						outcome="/pages/testeOpacidade/testeOpacidade.xhtml?faces-redirect=true">
+						
+						<f:param name="tesacao" value="Novo" />
+					</p:button>
+				</f:facet>
+
+
+
+				<p:column headerText="Código" style="width: 5%">
+					<center>
+						<h:outputText value="#{veiculo.id}" />
+					</center>
+				</p:column>
+
+				<p:column headerText="Nº Frota" filterBy="#{veiculo.numero_frota}"
+					style="width: 8%" sortBy="#{veiculo.numero_frota}">
+					<h:outputText value="#{veiculo.numero_frota}" />
+				</p:column>
+
+				<p:column headerText="Setor" style="width: 8%">
+					<h:outputText value="#{veiculo.setor.descricao}" />
+				</p:column>
+
+				<p:column headerText="Opacidade" style="width: 4%">
+					<h:outputText value="#{veiculo.opacidade}" />
+				</p:column>
+
+				<p:column headerText="Turbinado" style="width: 4%">
+					<h:outputText value="#{veiculo.turbinado}" />
+				</p:column>
+
+				<p:column headerText="LDA" style="width: 4%">
+					<h:outputText value="#{veiculo.lda}" />
+				</p:column>
+
+				<p:column headerText="Último Teste" style="width: 10%">
+					<h:outputText value="#{veiculo.ultimo_teste}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Próximo Teste" style="width: 10%">
+					<h:outputText value="#{veiculo.proximoTeste}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Dias Restantes" style="width: 10%">
+					<h:outputText value="#{veiculo.diasRestantes}" />
+				</p:column>
+
+
+
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="tesacao" value="#{teste_OpacidadeBean.acao}"></f:viewParam>
+			<f:event listener="#{teste_OpacidadeBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmTeste">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Teste Opacidade" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="pnTesteDados">
+
+				<h:outputText value="Código" />
+				<p:inputText maxlength="20" size="15" readonly="true"
+					value="#{teste_OpacidadeBean.testeOpacidadeCadastro.id}"
+					disabled="true" />
+
+				<h:outputText value="Nº Frota:" />
+				<p:selectOneMenu
+					value="#{teste_OpacidadeBean.testeOpacidadeCadastro.veiculo}"
+					converter="veiculoConverter"
+					disabled="#{teste_OpacidadeBean.acao == 'Excluir'}">
+					<f:selectItem itemValue="" itemLabel="Selecione um veículo:" />
+					<f:selectItem itemValue="" itemLabel="" />
+
+					<f:selectItems value="#{teste_OpacidadeBean.listaVeiculos}"
+						var="veiculo" itemValue="#{veiculo}"
+						itemLabel="#{veiculo.numero_frota}" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Opacidade:" />
+				<p:spinner size="6" value="#{teste_OpacidadeBean.testeOpacidadeCadastro.opacidade}"
+					maxlength="5" min="0" 
+					stepFactor="0.1">
+					<f:validateBean />
+				</p:spinner>
+
+				<h:outputText value="Observação:" />
+				<p:inputText maxlength="50" size="30"
+					onblur="this.value = this.value.toUpperCase();"
+					value="#{teste_OpacidadeBean.testeOpacidadeCadastro.observacoes}">
+
+				</p:inputText>
+
+
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Salvar"
+					update=":msgGlobal :frmTeste:pnTesteDados"
+					actionListener="#{teste_OpacidadeBean.salvar()}"
+					icon="ui-icon-check"
+					rendered="#{teste_OpacidadeBean.acao == 'Novo'}" />
+
+
+
+			</h:panelGrid>
+
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

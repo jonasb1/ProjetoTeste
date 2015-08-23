@@ -80,8 +80,8 @@
 			</h:panelGrid>
 
 			<h:panelGrid columns="5">
-				<p:commandButton value="Novo" update=":frmProduto:pnProdutoDados"
-					actionListener="#{produtoBean.novo()}"
+				<p:commandButton value="Novo" icon="ui-icon-document" update=":frmProduto:pnProdutoDados"
+					actionListener="#{produtoBean.novo()}" 
 					rendered="#{produtoBean.acao == 'Novo'}" />
 
 				<p:commandButton value="Salvar" icon="ui-icon-check"

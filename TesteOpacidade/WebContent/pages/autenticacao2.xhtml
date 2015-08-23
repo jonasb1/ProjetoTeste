@@ -20,13 +20,14 @@
 			</p:toolbar>
 
 			<p:panel header="Login"
-				style="font-size:15px; position: absolute; 
-				width: 300px;height: 150px;
+				style="font-size:17px; position: absolute; 
+				width: 300px;height: 160px;
 				left:50%;top:50%
 				;margin-left:-130px;margin-top:-120px;">
 
 				<p:panelGrid columns="2">
-					<p:outputLabel value="Id do Funcionário:" />
+					
+					<p:outputLabel value="Funcionário:" />
 					<p:inputMask mask="99-999999" size="13"
 						value="#{autenticacaoBean.usuarioLogado.codigoFuncionario}">
 					</p:inputMask>
@@ -35,11 +36,16 @@
 					<p:password maxlength="9" size="13"
 						value="#{autenticacaoBean.usuarioLogado.senha}">
 					</p:password>
+					
 				</p:panelGrid>
 				<center>
 					<!-- Para mudar de pagina Action  -->
-					<p:commandButton value="Entrar" update="growl" icon="ui-icon-key"
+				
+			
+					<p:commandButton value="Entrar" update="growl" icon="ui-icon-key" 
+				
 						action="#{autenticacaoBean.autenticar()}" />
+			
 				</center>
 
 			</p:panel>

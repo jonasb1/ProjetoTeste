@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+
+			<f:event listener="#{teste_OpacidadeBean.carregar()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Testes" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				value="#{teste_OpacidadeBean.listaTestes}"
+				paginatorPosition="bottom"
+				filteredValue="#{teste_OpacidadeBean.listaTestesFiltrados}"
+				var="teste" rows="18" paginator="true">
+
+
+
+				<p:column headerText="Código" style="width: 5%">
+					<center>
+						<h:outputText value="#{teste.id}" />
+					</center>
+
+				</p:column>
+
+				<p:column headerText="Veiculo"
+					filterBy="#{teste.veiculo.numero_frota}"
+					sortBy="#{teste.veiculo.numero_frota}">
+					<h:outputText value="#{teste.veiculo.numero_frota}" />
+				</p:column>
+
+
+				<p:column headerText="Data e horário">
+					<h:outputText value="#{teste.data_teste}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Teste Opacidade">
+					<h:outputText value="#{teste.opacidade}" />
+				</p:column>
+							
+
+				<p:column headerText="Observações">
+					<h:outputText value="#{teste.observacoes}" />
+				</p:column>
+
+
+			</p:dataTable>
+			<center>
+				<h:panelGrid columns="1">
+
+
+					<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+						outcome="/templates/modeloGeral.xhtml?faces-redirect=true" />
+
+				</h:panelGrid>
+			</center>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

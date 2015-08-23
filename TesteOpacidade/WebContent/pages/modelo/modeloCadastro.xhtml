@@ -33,7 +33,7 @@
 					disabled="true" value="#{modeloBean.modeloCadastro.id}" />
 
 				<h:outputText value="Descrição:" />
-				<p:inputText maxlength="50" size="30"
+				<p:inputText maxlength="50" size="30" onblur="this.value = this.value.toUpperCase();"
 					value="#{modeloBean.modeloCadastro.desrcicao}"
 					readonly="#{modeloBean.acao == 'Excluir'}">
 				
@@ -41,13 +41,13 @@
 				</p:inputText>
 
 				<h:outputText value="Ano:" />
-				<p:inputText size="30"
+				<p:inputText size="5"
 					value="#{modeloBean.modeloCadastro.ano}"
 					readonly="#{modeloBean.acao == 'Excluir'}">
 
 				</p:inputText>
 
-				<h:outputText value="Modelo:" />
+				<h:outputText value="Marca:" />
 				<p:selectOneMenu  value="#{modeloBean.modeloCadastro.marca}" 
 					converter="marcaConverter" disabled="#{modeloBean.acao == 'Excluir'}">
 					<f:selectItem itemValue="" itemLabel="Selecione uma marca:" />

@@ -57,7 +57,7 @@
 					<p:submenu label="Cadastros"
 						rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}">
 						<p:menuitem value="Estado" icon="ui-icon-tag"
-							outcome="/pages/estado/estadoPesquisa.xhtml"
+							outcome="/pages/estado/estadoPesquisa.xhtml" disabled="#{autenticacaoBean.funcionarioLogado.funcao == 'Gerente'}"
 							rendered="#{autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}" />
 
 						<p:menuitem value="Fornecedor" icon="ui-icon-tag"
