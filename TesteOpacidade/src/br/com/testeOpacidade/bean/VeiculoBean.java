@@ -105,7 +105,7 @@ public class VeiculoBean {
 
 			veiculoCadastro = new Veiculo();
 				
-			FacesUtil.adicionarMsgInfo("Modelo cadastrado com sucesso");
+			FacesUtil.adicionarMsgInfo("Veiculo cadastrado com sucesso");
 			
 		} catch (RuntimeException ex) {
 			FacesUtil.adicionarMsgErro("Erro ao tentar ao incluir o veiculo: "

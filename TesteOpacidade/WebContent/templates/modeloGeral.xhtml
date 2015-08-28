@@ -53,7 +53,7 @@
 							action="#{autenticacaoBean.sair()}" icon="ui-icon-power" />
 					</p:submenu>
 
-					<p:submenu label="Cadastros" >
+					<p:submenu label="Cadastros">
 						<p:menuitem value="Funcionário" icon="ui-icon-tag"
 							outcome="/pages/usuario/usuarioPesquisa.xhtml"
 							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
@@ -63,32 +63,35 @@
 							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
 
 						<p:menuitem value="Modelo" icon="ui-icon-tag"
-							outcome="/pages/modelo/modeloPesquisa.xhtml"
-							 />
+							outcome="/pages/modelo/modeloPesquisa.xhtml" />
 
 						<p:menuitem value="Setor" icon="ui-icon-tag"
-							outcome="/pages/setor/setorPesquisa.xhtml"
-							 />
+							outcome="/pages/setor/setorPesquisa.xhtml" />
 
 						<p:menuitem value="Veiculo" icon="ui-icon-tag"
-							outcome="/pages/veiculo/veiculoPesquisa.xhtml"
-							 />
+							outcome="/pages/veiculo/veiculoPesquisa.xhtml" />
 					</p:submenu>
 
 				</p:panelMenu>
 
 				<p:separator />
-				<p:commandButton value="Teste Opacidade"
-					action="/pages/testeOpacidade/listarVeiculos.xhtml"
+				<center>
+					<p:commandButton value="Teste Opacidade"
+						action="/pages/testeOpacidade/listarVeiculos.xhtml"
 						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton>
+				</center>
 				<p:separator />
-				<p:commandButton value="Consultar Testes"
-					action="/pages/testeOpacidade/listarTestes.xhtml"
-						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton>
 				
-				<p:commandButton value="Gerar Relatório"
-					action="/pages/relatorio/relatorio.xhtml"
+				<center>
+					<p:commandButton value="Consultar Testes"
+						action="/pages/testeOpacidade/listarTestes.xhtml"
 						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton>
+				</center>
+				
+				
+				<!-- 				<p:commandButton value="Gerar Relatório" -->
+				<!-- 					action="/pages/relatorio/relatorio.xhtml" -->
+				<!-- 						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton> -->
 
 			</h:form>
 		</p:layoutUnit>
