@@ -24,6 +24,7 @@ public class Teste_OpacidadeBean {
 	private String acao;
 	private Long id;
 
+	
 	public Teste_Opacidade getTesteOpacidadeCadastro() {
 		return testeOpacidadeCadastro;
 	}

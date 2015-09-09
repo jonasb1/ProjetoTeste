@@ -41,12 +41,7 @@
 
 
 
-				<p:column headerText="Código" style="width: 5%">
-					<center>
-						<h:outputText value="#{veiculo.id}" />
-					</center>
-				</p:column>
-
+				
 				<p:column headerText="Nº Frota" filterBy="#{veiculo.numero_frota}"
 					style="width: 8%" sortBy="#{veiculo.numero_frota}">
 					<h:outputText value="#{veiculo.numero_frota}" />
@@ -58,14 +53,6 @@
 
 				<p:column headerText="Opacidade" style="width: 4%">
 					<h:outputText value="#{veiculo.opacidade}" />
-				</p:column>
-
-				<p:column headerText="Turbinado" style="width: 4%">
-					<h:outputText value="#{veiculo.turbinado}" />
-				</p:column>
-
-				<p:column headerText="LDA" style="width: 4%">
-					<h:outputText value="#{veiculo.lda}" />
 				</p:column>
 
 				<p:column headerText="Último Teste" style="width: 10%">

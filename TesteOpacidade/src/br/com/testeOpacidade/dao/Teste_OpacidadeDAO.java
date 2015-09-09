@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.testeOpacidade.model.Teste_Opacidade;
-import br.com.testeOpacidade.model.Veiculo;
 import br.com.testeOpacidade.util.HibernateUtil;
 
 public class Teste_OpacidadeDAO {

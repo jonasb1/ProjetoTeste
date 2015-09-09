@@ -57,10 +57,10 @@ public class SetorBean {
 
 			setorCadastro = new Setor();
 
-			FacesUtil.adicionarMsgInfo("Setor adicionada com sucesso");
+			FacesUtil.adicionarMsgInfo("Setor adicionado com sucesso");
 
 		} catch (RuntimeException e) {
-			FacesUtil.adicionarMsgErro("Erro ao tentar incluir o Setor "
+			FacesUtil.adicionarMsgErro("Erro ao tentar incluir o setor "
 					+ e.getMessage());
 
 		}
@@ -77,7 +77,7 @@ public class SetorBean {
 			listaSetores = dao.listar();
 
 		} catch (RuntimeException e) {
-			FacesUtil.adicionarMsgErro("Erro ao listar as Setores "
+			FacesUtil.adicionarMsgErro("Erro ao listar os setores "
 					+ e.getMessage());
 		}
 
@@ -116,7 +116,7 @@ public class SetorBean {
 			SetorDAO dao = new SetorDAO();
 			dao.editar(setorCadastro);
 
-			FacesUtil.adicionarMsgInfo("Setor editada com sucesso");
+			FacesUtil.adicionarMsgInfo("Setor editado com sucesso");
 
 		} catch (RuntimeException e) {
 			FacesUtil

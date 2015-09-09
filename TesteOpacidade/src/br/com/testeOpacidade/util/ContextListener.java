@@ -1,6 +1,5 @@
 package br.com.testeOpacidade.util;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContextEvent;
@@ -62,16 +61,16 @@ public class ContextListener implements ServletContextListener{
 			
 			for (int i=0;i<listaVeiculos.size();i++){
 				v=listaVeiculos.get(i);
-				System.out.println("Dias restantes "+ v.getNumero_frota()+" ****"+v.getDiasRestantes());
+				//System.out.println("Dias restantes "+ v.getNumero_frota()+" ****"+v.getDiasRestantes());
 				
 				if(v.getDiasRestantes()<2){
-//					e.enviarEmailPorTipo(v.getNumero_frota(), v.getDiasRestantes());
+					e.enviarEmailPorTipo(v.getNumero_frota(), v.getDiasRestantes());
 				}
 								
 			}
 			
 			
 //			e.enviarEmail();
-//			
+			
 		}
 }

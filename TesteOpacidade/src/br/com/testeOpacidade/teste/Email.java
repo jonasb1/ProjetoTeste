@@ -18,7 +18,6 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.junit.Ignore;
-import org.junit.Test;
 
 public class Email {
 	@Ignore

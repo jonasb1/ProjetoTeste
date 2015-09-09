@@ -117,7 +117,7 @@ public class MarcaBean {
 			FacesUtil.adicionarMsgInfo("Marca editada com sucesso");
 			
 		}catch(RuntimeException e){
-			FacesUtil.adicionarMsgErro("Erro ao alterar marca"+e.getMessage());
+			FacesUtil.adicionarMsgErro("Erro ao editar marca"+e.getMessage());
 		}
 		
 	}

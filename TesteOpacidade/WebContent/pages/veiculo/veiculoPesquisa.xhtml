@@ -37,14 +37,9 @@
 
 					</p:button>
 				</f:facet>
-				<p:column headerText="Código" style="width: 5%">
-					<center>
-						<h:outputText value="#{veiculo.id}" />
-					</center>
-				</p:column>
 
 				<p:column headerText="Nº Frota" filterBy="#{veiculo.numero_frota}"
-					sortBy="#{veiculo.numero_frota}">
+					sortBy="#{veiculo.numero_frota}" >
 					<h:outputText value="#{veiculo.numero_frota}" />
 				</p:column>
 
@@ -60,19 +55,19 @@
 					<h:outputText value="#{veiculo.setor.descricao}" />
 				</p:column>
 				
-				<p:column headerText="Opacidade"  style="width: 8%">
+				<p:column headerText="Opacidade"  style="width: 6%">
 					<h:outputText value="#{veiculo.opacidade}" />
 				</p:column>
 				
-				<p:column headerText="Turbinado" style="width: 8%" >
+				<p:column headerText="Turbinado" style="width: 6%" >
 					<h:outputText value="#{veiculo.turbinado}" />
 				</p:column>
 				
-				<p:column headerText="LDA" style="width: 8%">
+				<p:column headerText="LDA" style="width: 4%">
 					<h:outputText value="#{veiculo.lda}" />
 				</p:column>
 				
-				<p:column headerText="Último Teste">
+				<p:column headerText="Último Teste" style="width: 6%">
 					<h:outputText value="#{veiculo.ultimo_teste}"  >
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
@@ -80,7 +75,7 @@
 				</p:column>
 				
 						
-				<p:column headerText="Opções:" style="width: 12%">
+				<p:column headerText="Opções:" style="width: 14%">
 					<p:button value="Editar"
 						outcome="/pages/veiculo/veiculoCadastro.xhtml?faces-redirect=true">
 						<f:param name="veiacao" value="Editar" />

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "teste_opacidade")
-@NamedQueries({ @NamedQuery(name = "Teste_Opacidade.listar", query = "SELECT teste_opacidade FROM Teste_Opacidade teste_opacidade") })
+@NamedQueries({ @NamedQuery(name = "Teste_Opacidade.listar", query = "SELECT teste_opacidade FROM Teste_Opacidade teste_opacidade order by TES_DATA_TESTE desc") })
 public class Teste_Opacidade {
 	@Id
 	@GeneratedValue

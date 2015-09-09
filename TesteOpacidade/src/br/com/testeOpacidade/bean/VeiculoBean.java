@@ -95,7 +95,8 @@ public class VeiculoBean {
 		
 			Calendar c = Calendar.getInstance();
 			c.setTime(veiculoCadastro.getUltimo_teste());
-			c.add(Calendar.DATE,+10);
+			//Todos os veiculos sao 180 exceto bombeiros
+			c.add(Calendar.DATE,+180);
 			
 			veiculoCadastro.setProximoTeste(c.getTime());
 			
@@ -178,7 +179,17 @@ public class VeiculoBean {
 	public void editar() {
 
 		try {
+			
+			Calendar c = Calendar.getInstance();
+			c.setTime(veiculoCadastro.getUltimo_teste());
+			//Todos os veiculos sao 180 exceto bombeiros
+			c.add(Calendar.DATE,+180);
+			
+			veiculoCadastro.setProximoTeste(c.getTime());
+			
+			
 			VeiculoDAO dao = new VeiculoDAO();
+			
 			dao.editar(veiculoCadastro);
 
 			FacesUtil.adicionarMsgInfo("Veiculo editado com sucesso");
@@ -207,7 +218,7 @@ public class VeiculoBean {
 				System.out.println("Nº Frota: *"+v.getNumero_frota());
 								
 				dias = -1*((int) ((dataHoje.getTime() - v.getProximoTeste().getTime()) / 86400000L));
-//				dias++;
+				dias++;
 								
 //				System.out.println("Data de hoje é :"+dataHoje);
 //				
@@ -217,7 +228,7 @@ public class VeiculoBean {
 //				System.out.println("Data do ultimo teste: "+v.getUltimo_teste());
 //				System.out.println("---------------------------------------------------------");
 				
-				System.out.println("DIAS Restantes: ************"+v.getDiasRestantes());
+				//System.out.println("DIAS Restantes: ************"+v.getDiasRestantes());
 //				
 				
 				v.setDiasRestantes(dias);

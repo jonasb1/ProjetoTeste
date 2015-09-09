@@ -17,7 +17,7 @@ public class TesteDatas {
 	@Test
 	public void teste(){
 		
-		Calendar today = Calendar.getInstance();
+		//Calendar today = Calendar.getInstance();
 		
 		VeiculoDAO dao = new VeiculoDAO();
 		

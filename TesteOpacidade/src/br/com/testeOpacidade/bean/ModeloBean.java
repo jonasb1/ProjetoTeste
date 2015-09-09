@@ -143,7 +143,7 @@ public class ModeloBean {
 
 		} catch (RuntimeException ex) {
 			FacesUtil
-					.adicionarMsgErro("Erro ao tentar ao remover o Modelo: "
+					.adicionarMsgErro("Erro ao tentar ao remover o modelo: "
 							+ ex.getMessage());
 		}
 	}
@@ -157,7 +157,7 @@ public class ModeloBean {
 			FacesUtil.adicionarMsgInfo("Modelo editado com sucesso");
 
 		} catch (RuntimeException ex) {
-			FacesUtil.adicionarMsgErro("Erro ao tentar editar o Modelo: "
+			FacesUtil.adicionarMsgErro("Erro ao tentar editar o modelo: "
 					+ ex.getMessage());
 		}
 	}
