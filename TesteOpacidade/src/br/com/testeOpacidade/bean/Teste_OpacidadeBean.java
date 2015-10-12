@@ -87,8 +87,26 @@ public class Teste_OpacidadeBean {
 				
 				Calendar c = Calendar.getInstance();
 				c.setTime(v.getUltimo_teste());
-				c.add(Calendar.DATE,+10);
 				
+				if (testeOpacidadeCadastro.getVeiculo().getNumero_frota()==2023){
+					c.add(Calendar.DATE,+360);
+				}
+				else if (testeOpacidadeCadastro.getVeiculo().getNumero_frota()==2065){
+					c.add(Calendar.DATE,+365);
+				}
+				
+				else if (testeOpacidadeCadastro.getVeiculo().getNumero_frota()==2068){
+					c.add(Calendar.DATE,+365);
+				}
+				
+				else if (testeOpacidadeCadastro.getVeiculo().getNumero_frota()==2087){
+					c.add(Calendar.DATE,+360);
+				}
+				
+				else{
+					c.add(Calendar.DATE,+180);
+				}
+								
 				v.setProximoTeste(c.getTime());
 				
 				daoV.editar(v);

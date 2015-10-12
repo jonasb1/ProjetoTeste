@@ -53,7 +53,7 @@
 							action="#{autenticacaoBean.sair()}" icon="ui-icon-power" />
 					</p:submenu>
 
-					<p:submenu label="Cadastros">
+					<p:submenu label="Cadastros" rendered="#{autenticacaoBean.usuarioLogado.funcao != null and autenticacaoBean.usuarioLogado.funcao != 'Expectador'  }">
 						<p:menuitem value="Funcionário" icon="ui-icon-tag"
 							outcome="/pages/usuario/usuarioPesquisa.xhtml"
 							rendered="#{autenticacaoBean.usuarioLogado.funcao != 'Usuário'}" />
@@ -68,7 +68,7 @@
 						<p:menuitem value="Setor" icon="ui-icon-tag"
 							outcome="/pages/setor/setorPesquisa.xhtml" />
 
-						<p:menuitem value="Veiculo" icon="ui-icon-tag"
+						<p:menuitem value="Veículo" icon="ui-icon-tag"
 							outcome="/pages/veiculo/veiculoPesquisa.xhtml" />
 					</p:submenu>
 
@@ -77,18 +77,38 @@
 				<p:separator />
 				<center>
 					<p:commandButton value="Teste Opacidade"
-						action="/pages/testeOpacidade/listarVeiculos.xhtml"
-						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton>
+					   title="Exibe todos os veículos"
+					   action="/pages/testeOpacidade/listarVeiculos.xhtml"
+						rendered="#{autenticacaoBean.usuarioLogado.funcao != null and autenticacaoBean.usuarioLogado.funcao != 'Expectador'  }"></p:commandButton>
 				</center>
 				<p:separator />
+				<center>
+					<p:commandButton value="Veículos Vencendo"
+					   title="Exibe veículos faltando 25 dias para o vencimento  "
+					   action="/pages/testeOpacidade/listarVeiculosVencendo.xhtml"
+						rendered="#{autenticacaoBean.usuarioLogado.funcao != null }"></p:commandButton>
+						
+				</center>
 				
+				
+				<p:separator />
 				<center>
 					<p:commandButton value="Consultar Testes"
 						action="/pages/testeOpacidade/listarTestes.xhtml"
-						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton>
+						rendered="#{autenticacaoBean.usuarioLogado.funcao != null and autenticacaoBean.usuarioLogado.funcao != 'Expectador' }"></p:commandButton>
 				</center>
-				
-				
+
+
+				<p:separator />
+				<center>
+					<p:commandButton value="Consultar Veículos"
+						title="Exibe todos os veiculos"
+						action="/pages/testeOpacidade/listarVeiculos.xhtml"
+						rendered="#{autenticacaoBean.usuarioLogado.funcao == 'Expectador' }"></p:commandButton>
+				</center>
+					
+
+
 				<!-- 				<p:commandButton value="Gerar Relatório" -->
 				<!-- 					action="/pages/relatorio/relatorio.xhtml" -->
 				<!-- 						rendered="#{autenticacaoBean.usuarioLogado.funcao != null}"></p:commandButton> -->

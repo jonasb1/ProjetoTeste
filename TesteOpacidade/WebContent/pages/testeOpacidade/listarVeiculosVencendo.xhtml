@@ -11,7 +11,7 @@
 	<ui:define name="metadata">
 		<f:metadata>
 
-			<f:event listener="#{veiculoBean.carregarPesquisaVeiculos()}"
+			<f:event listener="#{veiculoBean.carregarPesquisaVeiculosVencidos()}"
 				type="preRenderView"></f:event>
 		</f:metadata>
 	</ui:define>
@@ -26,7 +26,7 @@
 			</p:toolbar>
 
 			<p:dataTable emptyMessage="Nenhum registro encontrado"
-				value="#{veiculoBean.listaVeiculos}" paginatorPosition="bottom"
+				value="#{veiculoBean.listaVeiculosVencidos}" paginatorPosition="bottom"
 				filteredValue="#{veiculoBean.listaVeiculosFiltrados}" var="veiculo"
 				rows="10" paginator="true">
 
@@ -47,7 +47,7 @@
 					<center>
 						<h:outputText value="#{veiculo.numero_frota}"
 							rendered="#{veiculo.diasRestantes le 0 }"
-							style="color: red ;font-weight:bold; font-size:15px;   " />
+							style="color: red ;font-weight:bold; font-size:20px;   " />
 					</center>
 
 
@@ -55,7 +55,7 @@
 					<center>
 						<h:outputText value="#{veiculo.numero_frota}"
 							rendered="#{veiculo.diasRestantes ge 1 }"
-							style="color: green; font-weight:italic; font-size:15px;font-weight:bold " />
+							style="color: black; font-weight:italic; font-size:15px;font-weight:bold " />
 					</center>
 
 
@@ -69,7 +69,7 @@
 
 					<center>
 						<h:outputText value="#{veiculo.setor.descricao}"
-							rendered="#{veiculo.diasRestantes ge 1 }" style="color: green " />
+							rendered="#{veiculo.diasRestantes ge 1 }" style="color: black " />
 					</center>
 
 				</p:column>
@@ -82,7 +82,7 @@
 
 					<center>
 						<h:outputText value="#{veiculo.opacidade}"
-							rendered="#{veiculo.diasRestantes ge 1 }" style="color: green " />
+							rendered="#{veiculo.diasRestantes ge 1 }" style="color: black " />
 					</center>
 
 
@@ -91,7 +91,7 @@
 				<p:column headerText="Último Teste" style="width: 10%">
 					<center>
 						<h:outputText value="#{veiculo.ultimo_teste}"
-							rendered="#{veiculo.diasRestantes ge 1 }" style="color: green ">
+							rendered="#{veiculo.diasRestantes ge 1 }" style="color: black ">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</center>
@@ -116,7 +116,7 @@
 
 					<center>
 						<h:outputText value="#{veiculo.proximoTeste}"
-							rendered="#{veiculo.diasRestantes ge 1 }" style="color: green ">
+							rendered="#{veiculo.diasRestantes ge 1 }" style="color: black ">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</center>
@@ -129,18 +129,17 @@
 					<center>
 						<h:outputText value="#{veiculo.diasRestantes}"
 							rendered="#{veiculo.diasRestantes le 0 }"
-							style="color: red ;font-weight:bold; font-size:15px;   " />
+							style="color: red ;font-weight:bold; font-size:20px;   " />
 					</center>
 
 					<!-- Se valor for maior ou igual  -->
 					<center>
 						<h:outputText value="#{veiculo.diasRestantes}"
 							rendered="#{veiculo.diasRestantes ge 1 }"
-							style="color: green; font-weight:italic; font-size:15px;font-weight:bold " />
+							style="color: black; font-weight:italic; font-size:15px;font-weight:bold " />
 
 
 					</center>
-
 		
 
 				</p:column>

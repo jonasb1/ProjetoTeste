@@ -1,5 +1,42 @@
 @charset "UTF-8";
 
 .ui-widget, .ui-widget .ui-widget {
-    font-size: 95%;
+	font-size: 95%;
 }
+
+.preto {
+	background-color: #FFFAFA;
+	color: black;
+}
+
+.ui-datatable-odd {
+	background: #ffffff;
+}
+
+.ui-datatable-even {
+	background: #F2F5F9;
+}
+
+.color {
+	background-color: red;
+	font-weight: bold;
+	
+}
+
+.verde {  
+    color: #00FF00;  
+    background-color: #000000;  
+    background-image: none;  
+}  
+      
+.amarelo {  
+    color: #FFFF66;  
+    background-color: #000000;  
+    background-image: none;  
+}  
+  
+.vermelho {  
+    color: #FF0000;  
+    background-color: #000000;  
+    background-image: none;  
+}  

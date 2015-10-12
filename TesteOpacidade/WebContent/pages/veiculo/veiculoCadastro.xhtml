@@ -22,7 +22,7 @@
 
 			<p:toolbar>
 				<f:facet name="left">
-					<h:outputText value="Veiculo" />
+					<h:outputText value="Veículo" />
 				</f:facet>
 
 			</p:toolbar>
@@ -33,11 +33,11 @@
 					disabled="true" value="#{veiculoBean.veiculoCadastro.id}" />
 
 				<h:outputText value="Modelo:" />
-				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.modelo}" 
+				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.modelo}" filter="true" 
 					converter="modeloConverter" 
 					disabled="#{veiculoBean.acao == 'Excluir'}">
 					<f:selectItem itemValue="" itemLabel="Selecione um modelo:"  />
-
+					<f:selectItem itemValue="" itemLabel="" />
 
 					<f:selectItems value="#{veiculoBean.listaModelos}" var="modelo"
 						itemValue="#{modelo}" itemLabel="#{modelo.desrcicao}" />
@@ -45,7 +45,7 @@
 				</p:selectOneMenu>
 
 				<h:outputText value="Setor:" />
-				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.setor}"
+				<p:selectOneMenu value="#{veiculoBean.veiculoCadastro.setor}" filter="true"
 					converter="setorConverter"
 					disabled="#{veiculoBean.acao == 'Excluir'}">
 					<f:selectItem itemValue="" itemLabel="Selecione um setor:" />

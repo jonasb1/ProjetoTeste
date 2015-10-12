@@ -34,7 +34,7 @@
 					disabled="true" />
 
 				<h:outputText value="Nº Frota:" />
-				<p:selectOneMenu
+				<p:selectOneMenu  filter="true"
 					value="#{teste_OpacidadeBean.testeOpacidadeCadastro.veiculo}"
 					converter="veiculoConverter"
 					disabled="#{teste_OpacidadeBean.acao == 'Excluir'}">

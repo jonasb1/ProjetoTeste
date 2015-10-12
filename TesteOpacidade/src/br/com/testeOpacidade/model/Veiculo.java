@@ -25,7 +25,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="veiculo")
 @NamedQueries({
-	@NamedQuery(name = "Veiculo.listar", query = "SELECT veiculo FROM Veiculo veiculo"),
+	@NamedQuery(name = "Veiculo.listar", query = "SELECT veiculo FROM Veiculo veiculo "),
+	@NamedQuery(name = "Veiculo.listarVeiculosVencendo", query = "SELECT veiculo FROM Veiculo veiculo WHERE VEI_DIAS <= 25"),
 	@NamedQuery(name = "Veiculo.buscarPorCodigo", query = "SELECT veiculo FROM Veiculo veiculo WHERE id = :id") })
 public class Veiculo {
 	@GeneratedValue

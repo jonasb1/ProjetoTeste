@@ -48,6 +48,24 @@ public class VeiculoDAO {
 		return veiculos; 
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Veiculo> listarVencido() {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		List<Veiculo> veiculos = null;
+
+		try {
+			Query consulta = sessao.getNamedQuery("Veiculo.listarVeiculosVencendo");
+			veiculos = consulta.list();
+
+		} catch (RuntimeException ex) {
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return veiculos; 
+
+	}
 
 	
 	public Veiculo buscarPorCodigo(Long id) {

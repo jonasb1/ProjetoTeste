@@ -85,6 +85,11 @@ public class EnviarEmail {
 			msg.setFrom(new InternetAddress("jonas.benevenuto.192@gmail.com"));
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
 					"jonas_benevenuto@outlook.com", false));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
+					"jonas_alexandre92@hotmail.com", false));
+			
+			
+			
 			msg.setSubject("Dias Restantes do " + numero_frota);
 			msg.setText("Está faltando apenas " + diasRestantes
 					+ " dias para o veiculo " + numero_frota

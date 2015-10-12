@@ -20,6 +20,8 @@ import br.com.testeOpacidade.util.FacesUtil;
 public class VeiculoBean {
 	private Veiculo veiculoCadastro;
 	private List<Veiculo> listaVeiculos;
+	private List<Veiculo> listaVeiculosVencidos;
+	
 	private List<Veiculo> ListaVeiculosFiltrados;
 	
 	private List<Setor> listaSetores;
@@ -84,6 +86,14 @@ public class VeiculoBean {
 		return id;
 	}
 
+	public List<Veiculo> getListaVeiculosVencidos() {
+		return listaVeiculosVencidos;
+	}
+
+	public void setListaVeiculosVencidos(List<Veiculo> listaVeiculosVencidos) {
+		this.listaVeiculosVencidos = listaVeiculosVencidos;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -96,7 +106,26 @@ public class VeiculoBean {
 			Calendar c = Calendar.getInstance();
 			c.setTime(veiculoCadastro.getUltimo_teste());
 			//Todos os veiculos sao 180 exceto bombeiros
-			c.add(Calendar.DATE,+180);
+			
+			if (veiculoCadastro.getNumero_frota()==2023){
+				c.add(Calendar.DATE,+360);
+			}
+			else if (veiculoCadastro.getNumero_frota()==2065){
+				c.add(Calendar.DATE,+365);
+			}
+			
+			else if (veiculoCadastro.getNumero_frota()==2068){
+				c.add(Calendar.DATE,+365);
+			}
+			
+			else if (veiculoCadastro.getNumero_frota()==2087){
+				c.add(Calendar.DATE,+360);
+			}
+			
+			else{
+				c.add(Calendar.DATE,+180);
+			}
+			
 			
 			veiculoCadastro.setProximoTeste(c.getTime());
 			
@@ -183,7 +212,25 @@ public class VeiculoBean {
 			Calendar c = Calendar.getInstance();
 			c.setTime(veiculoCadastro.getUltimo_teste());
 			//Todos os veiculos sao 180 exceto bombeiros
-			c.add(Calendar.DATE,+180);
+			
+			if (veiculoCadastro.getNumero_frota()==2023){
+				c.add(Calendar.DATE,+360);
+			}
+			else if (veiculoCadastro.getNumero_frota()==2065){
+				c.add(Calendar.DATE,+365);
+			}
+			
+			else if (veiculoCadastro.getNumero_frota()==2068){
+				c.add(Calendar.DATE,+365);
+			}
+			
+			else if (veiculoCadastro.getNumero_frota()==2087){
+				c.add(Calendar.DATE,+360);
+			}
+			
+			else{
+				c.add(Calendar.DATE,+180);
+			}
 			
 			veiculoCadastro.setProximoTeste(c.getTime());
 			
@@ -285,6 +332,41 @@ public class VeiculoBean {
 //			v.setProximoTeste(c);
 		}
 	}
+	
+	
+	public void carregarPesquisaVeiculosVencidos() {
+		try {
+			
+			
+			VeiculoDAO dao = new VeiculoDAO();
+			listaVeiculosVencidos = dao.listarVencido();	
+			Veiculo v= new Veiculo();
+			int dias=0;
+			for (int i=0;i<listaVeiculosVencidos.size();i++){
+				v=listaVeiculosVencidos.get(i);
+				
+				Date dataHoje = new Date();
+															
+				dias = -1*((int) ((dataHoje.getTime() - v.getProximoTeste().getTime()) / 86400000L));
+				dias++;
+					
+				
+				v.setDiasRestantes(dias);
+				
+				dao.editar(v);
+				
+			}
+						
+			
+		} catch (RuntimeException ex) {
+			FacesUtil
+					.adicionarMsgErro("Erro ao tentar obter os dados dos modelos e setores: "
+							+ ex.getMessage());
+
+		}
+
+	}
+	
 	
 	
 
